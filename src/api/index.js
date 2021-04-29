@@ -8,13 +8,11 @@ export const createPost = (newPost) => {
 }
 export const updatePost = (id, updatedPost) => axios.patch(`${url}/${id}`, updatedPost)
 export const deletePost = async (id) => {
-
     try {
         await axios.delete(`${url}/${id}`)
-        console.log('AXIOS DELETE', id)
     } catch (error) {
         console.log(error)
     }
-
-    console.log('..................  DELETE')
 }
+
+export const likePost = (id) => axios.patch(`${url}/${id}/likePost`)

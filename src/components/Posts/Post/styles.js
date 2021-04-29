@@ -13,11 +13,17 @@ export default makeStyles({
     fullHeightCard: {
         height: '100%',
     },
+    img: {
+        borderBlock: 'black',
+        borderRadius: '15px',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        backgroundBlendMode: 'darken',
+    },
     card: {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        borderRadius: '15px',
+        borderRadius: '30px',
         height: '100%',
         position: 'relative',
     },

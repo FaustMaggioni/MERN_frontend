@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { createPost, updatePost } from '../../actions/posts'
 
 
-const Form = ({ currentId, setCurrentId }) => {
+const Form = ({ currentId, setCurrentId, setAgregar }) => {
     const classes = useStyles()
     const dispatch = useDispatch()
     const post = useSelector((state) => currentId ? state.posts.find((p) => p._id == currentId) : null)
@@ -29,6 +29,7 @@ const Form = ({ currentId, setCurrentId }) => {
         } catch (error) {
             console.log(error);
         }
+        setAgregar(false)
         clear()
     }
     const clear = () => {
@@ -40,6 +41,7 @@ const Form = ({ currentId, setCurrentId }) => {
             tags: [],
             selectedFile: '',
         })
+        setAgregar(false)
     }
     const [postData, setPostData] = useState({
         creator: '',
