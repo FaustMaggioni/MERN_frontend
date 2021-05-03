@@ -11,12 +11,15 @@ import { Popover } from '@varld/popover';
 
 
 
-const Post = ({ post, setCurrentId }) => {
+const Post = ({ post, setAgregar, setCurrentId }) => {
     const classes = useStyles()
     const dispatch = useDispatch()
 
-
-
+    const set = ()=>{
+        console.log('SET')
+        setAgregar(true)
+        setCurrentId(post._id)
+    }
     return (
         <Card className={classes.card}>
 
@@ -27,7 +30,7 @@ const Post = ({ post, setCurrentId }) => {
                 <Typography variant='body2'>{moment(post.createdAt).fromNow()}</Typography>
             </div>
             <div className={classes.overlay2}>
-                <Button style={{ color: 'white' }} size='small' onClick={() => setCurrentId(post._id)} >
+                <Button style={{ color: 'white' }} size='small' onClick={set}>
                     <MoreHorizIcon fontSize='default' />
                 </Button>
             </div>
