@@ -4,6 +4,7 @@ import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Visibility from "@material-ui/icons/Visibility";
 
 const Input = ({name,label,half,handleShowPassword,handleChange,type,autoFocus}) =>{
+
     useEffect(() => {
         console.log(type)
     }, [type]);
@@ -15,6 +16,7 @@ const Input = ({name,label,half,handleShowPassword,handleChange,type,autoFocus})
                 onChange={handleChange}
                 variant={'outlined'}
                 required
+                type={type}
                 fullWidth
                 label={label}
                 autoFocus={autoFocus}
@@ -22,7 +24,9 @@ const Input = ({name,label,half,handleShowPassword,handleChange,type,autoFocus})
                     endAdornment: (
                         <InputAdornment position="end">
                             <IconButton onClick={handleShowPassword}>
-                                {type === 'password' ? <Visibility /> : <VisibilityOff />}
+                                {
+                                    (type==='password')? (<VisibilityOff/>) : (<Visibility/>)
+                                }
                             </IconButton>
                         </InputAdornment>
                     ),
