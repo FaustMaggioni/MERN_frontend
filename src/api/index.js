@@ -1,18 +1,16 @@
 import axios from 'axios'
+const API = axios.create({baseURL: 'http://localhost:5000'})
 
-const url = 'http://localhost:5000/posts';
-
-export const fetchPosts = () => { return axios.get(url) }
+export const fetchPosts = () => { return API.get('/posts') }
 export const createPost = (newPost) => {
-    return axios.post(url, newPost)
+    return API.post('/posts', newPost)
 }
-export const updatePost = (id, updatedPost) => axios.patch(`${url}/${id}`, updatedPost)
+export const updatePost = (id, updatedPost) => API.patch(`posts/${id}`, updatedPost)
 export const deletePost = async (id) => {
     try {
-        await axios.delete(`${url}/${id}`)
+        await API.delete(`posts/${id}`)
     } catch (error) {
         console.log(error)
     }
 }
-
-export const likePost = (id) => axios.patch(`${url}/${id}/likePost`)
+export const likePost = (id) => API.patch(`posts/${id}/likePost`)
