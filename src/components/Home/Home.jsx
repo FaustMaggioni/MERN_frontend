@@ -6,12 +6,11 @@ import useStyles from "../../styles";
 import {useDispatch} from "react-redux";
 import {getPosts} from "../../actions/posts";
 
-const Home = () =>{
-    const [agregar, setAgregar] = useState(false)
+const Home = ({user,setUser}) =>{
     const [currentId, setCurrentId] = useState(null)
     const classes = useStyles()
     const dispatch = useDispatch()
-
+    const [agregar,setAgregar] = useState(false)
 
     useEffect(() => {
         dispatch(getPosts())
@@ -20,16 +19,16 @@ const Home = () =>{
     return(
         <Grow in >
             <Container>
-                {!agregar && (<Button onClick={() => setAgregar(true)}> Add post</Button>)}
+                {user && (<Button onClick={() => setAgregar(true)}> Add post</Button>)}
                 <Grid className={classes.mainContainer} container justify='space-between' spacing={3}>
                     <Grid item xs={12} sm={7}>
-                        <Posts setAgregar={setAgregar} setCurrentId={setCurrentId}> </Posts>
+                        <Posts setCurrentId={setCurrentId}> </Posts>
                     </Grid>
-                    {agregar && (
+                    {(agregar && user)? (
                         <Grid item xs={12} sm={4}>
-                            <Form setAgregar={setAgregar} currentId={currentId} setCurrentId={setCurrentId}></Form>
+                            <Form  setAgregar={setAgregar} currentId={currentId} setCurrentId={setCurrentId}></Form>
                         </Grid>
-                    )}
+                    ):<span></span>}
                 </Grid>
             </Container>
         </Grow>

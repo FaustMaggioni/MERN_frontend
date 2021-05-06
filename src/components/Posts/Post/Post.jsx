@@ -11,13 +11,12 @@ import { Popover } from '@varld/popover';
 
 
 
-const Post = ({ post, setAgregar, setCurrentId }) => {
+const Post = ({ post, setCurrentId }) => {
     const classes = useStyles()
     const dispatch = useDispatch()
 
     const set = ()=>{
         console.log('SET')
-        setAgregar(true)
         setCurrentId(post._id)
     }
     return (

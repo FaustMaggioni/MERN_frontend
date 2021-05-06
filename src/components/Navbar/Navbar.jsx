@@ -45,9 +45,9 @@ const Botones = ({user,setIniciando,setUser}) =>{
     }
 }
 
-const Navbar = ({}) =>{
+const Navbar = ({user, setUser}) =>{
     const classes = useStyles()
-    const [user,setUser] = useState(JSON.parse(localStorage.getItem('profile')))
+
     const location= useLocation()
     const [iniciando,setIniciando]= useState(false)
     console.log(user)
