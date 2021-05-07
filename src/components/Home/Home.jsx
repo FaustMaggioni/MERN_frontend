@@ -19,10 +19,10 @@ const Home = ({user,setUser}) =>{
     return(
         <Grow in >
             <Container>
-                {user && (<Button onClick={() => setAgregar(true)}> Add post</Button>)}
+                {(user && !agregar)?(<Button onClick={() => setAgregar(true)}> Add post</Button>):(<span></span>)}
                 <Grid className={classes.mainContainer} container justify='space-between' spacing={3}>
                     <Grid item xs={12} sm={7}>
-                        <Posts setCurrentId={setCurrentId}> </Posts>
+                        <Posts setCurrentId={setCurrentId} setAgregar={setAgregar}> </Posts>
                     </Grid>
                     {(agregar && user)? (
                         <Grid item xs={12} sm={4}>

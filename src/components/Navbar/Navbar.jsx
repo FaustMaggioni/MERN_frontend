@@ -4,23 +4,12 @@ import memories from "../../images/memories.png";
 import useStyles from './styles'
 import {Link,useHistory, useLocation} from 'react-router-dom'
 import {useDispatch}  from "react-redux";
+import decode from 'jwt-decode'
 
 
+const Botones = ({user,setIniciando,logout}) =>{
 
-const Botones = ({user,setIniciando,setUser}) =>{
-    const dispatch= useDispatch()
     const classes = useStyles()
-    const history = useHistory()
-
-
-    const logout = () =>{
-        console.log('LOGOUT')
-        dispatch({type: 'LOG_OUT'})
-        history.push('/')
-        setUser(null)
-        setIniciando(false)
-    }
-
 
     if(user){
         return(
@@ -47,13 +36,28 @@ const Botones = ({user,setIniciando,setUser}) =>{
 
 const Navbar = ({user, setUser}) =>{
     const classes = useStyles()
-
+    const history = useHistory()
+    const dispatch= useDispatch()
     const location= useLocation()
     const [iniciando,setIniciando]= useState(false)
-    console.log(user)
+
+    const logout = () =>{
+        console.log('LOGOUT')
+        dispatch({type: 'LOG_OUT'})
+        history.push('/')
+        setUser(null)
+        setIniciando(false)
+    }
 
     useEffect(() => {
         const token = user?.token
+
+        if(token){
+            const decodedToken = decode(token)
+            if(decodedToken.exp * 1000 < new Date().getTime()){
+                logout()
+            }
+        }
         setUser(JSON.parse(localStorage.getItem('profile')))
         setIniciando(false)
     }, [location]);
@@ -65,7 +69,7 @@ const Navbar = ({user, setUser}) =>{
                     <img className={classes.image} src={memories} alt='memories' height='60' />
                 </div>
                 <Toolbar className={classes.toolbar}>
-                    {!iniciando? (<Botones setUser={setUser} setIniciando={setIniciando} user={user}></Botones>) :(<span></span>)}
+                    {!iniciando? (<Botones setUser={setUser} logout={logout} setIniciando={setIniciando} user={user}></Botones>) :(<span></span>)}
                 </Toolbar>
             </AppBar>
     )
